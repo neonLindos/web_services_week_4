@@ -1,53 +1,62 @@
 # CSE5032 · Модуль 04 — EF Core, Repository, DTO и AutoMapper
 
-**Работу выполнил:** Рябинин Максим.
+**Работу выполнил:** Рябинин Максим
 
-Три самостоятельных проекта на .NET 10 / ASP.NET Core с SQLite и миграциями Code First.
+Четвёртая тема курса **«Разработка веб-сервисов»**: работа с базой данных через Entity Framework Core, миграции Code First, выделение Repository, преобразование Entity ↔ DTO через AutoMapper и единый формат ответа ReturnResult.
 
-| Работа | Проект | Требования из DOCX |
+## Все работы по курсу CSE5032
+
+| Неделя | Тема | Репозиторий |
 |---|---|---|
-| [Домашняя](hw/README.md) | Каталог книг | CRUD, поиск автора, Year, Price, Description, DTO, AutoMapper, ReturnResult |
-| [Лабораторная](lab/README.md) | Товары | CRUD, ProductDto без Category, Repository, AutoMapper, ReturnResult |
-| [Практическая](prac/README.md) | Команды | CRUD, поиск города, TeamDto без Description, Repository, AutoMapper, ReturnResult |
+| 1 | Введение в ASP.NET Core | [web_services_week_1](https://github.com/neonLindos/web_services_week_1) |
+| 2 | Web API + CRUD | [web_services_week_2](https://github.com/neonLindos/web_services_week_2) |
+| 3 | Dependency Injection и логирование | [web_services_week_3](https://github.com/neonLindos/web_services_week_3) |
+| 4 | EF Core, Repository, DTO и AutoMapper | **этот репозиторий** |
 
-Оригиналы трёх заданий сохранены в корне в DOCX. Markdown-копии находятся рядом с решениями. Название репозитория продолжает принятую нумерацию; содержание сверено именно с заданиями модуля 04.
+| Работа | Проект | Ресурс | Что показано |
+|--------|--------|--------|-----------|
+| [hw/](hw/) | `hw` | Book, Author | полный CRUD `/api/books`, поиск по автору, валидация DTO, ReturnResult |
+| [lab/](lab/) | `ProductLab` | Product | полный CRUD `/api/products`, ProductDto без Category, Repository, AutoMapper |
+| [prac/](prac/) | `TeamPractice` | Team | полный CRUD `/api/team`, поиск по городу, TeamDto без Description |
 
-## Запуск
+## Как запустить
 
-Нужен .NET 10 SDK. Из корня репозитория:
+Нужен [.NET 10 SDK](https://dotnet.microsoft.com/download). Из корня репозитория:
 
 ```powershell
 dotnet tool restore
-cd hw # либо lab или prac
+cd hw   # или lab, prac
 dotnet restore
 dotnet ef database update
 dotnet run --launch-profile http
 ```
 
-| Проект | Swagger |
+Откройте Swagger UI:
+
+| Проект | Адрес |
 |---|---|
 | hw | http://localhost:5294/swagger |
 | lab | http://localhost:5263/swagger |
 | prac | http://localhost:5191/swagger |
 
-Каждый проект использует свою SQLite-базу и строку подключения в appsettings.json. Базы не хранятся в Git: они создаются миграциями. API запускаются пользователем.
+## Структура
 
-## Проверка соответствия
+Каждая подпапка `hw/`, `lab/`, `prac/` — самостоятельный проект:
+
+- `.docx` в корне — методичка от преподавателя, как выдана;
+- `Модуль_04_*.md` — та же методичка в Markdown;
+- `README.md` — решение: что реализовано, ответы на контрольные вопросы, итоговая таблица;
+- `Migrations/` — миграции для создания и обновления базы данных;
+- `.http` — примеры запросов для демонстрации API.
+
+Данные во всех решениях хранятся в SQLite. У каждого проекта своя база и строка подключения в `appsettings.json`; база создаётся командой `dotnet ef database update`. Локальные базы и результаты сборки исключены через `.gitignore`.
+
+## Проверка
+
+Из корня репозитория:
 
 ```powershell
 dotnet run --project checks
 ```
 
-Консольные проверки выполняются без веб-сервера на SQLite в памяти: миграции, CRUD всех трёх API, AutoMapper, ответы 404, поиск автора и города, исключение Category/Description из DTO и сохранение этих полей при PUT. Для книг также проверяются валидация DTO, повторное использование автора и обновление старой схемы без потери книг.
-
-Проверки не заменяют демонстрацию HTTP и Swagger: последовательности запросов приведены в README проектов и файлах .http. Локальные рабочие базы при проверке не изменяются.
-
-## Состав репозитория
-
-Исходники, проекты, миграции, конфигурация без секретов, HTTP-примеры, проверки и задания включены. Сборки bin/obj, локальные базы, настройки IDE, временные файлы Office и repomix-output исключены через .gitignore.
-
-## Другие работы
-
-- [Модуль 01](https://github.com/neonLindos/web_services_week_1)
-- [Модуль 02](https://github.com/neonLindos/web_services_week_2)
-- [Модуль 03](https://github.com/neonLindos/web_services_week_3)
+Проверки используют SQLite в памяти: миграции, CRUD, AutoMapper, ответы 404, поиск автора и города, скрытие полей DTO и их сохранение при PUT. Для книг также проверяются валидация, повторное использование автора и обновление старой схемы. Веб-сервер не запускается; сценарии демонстрации через Swagger приведены в README проектов.
