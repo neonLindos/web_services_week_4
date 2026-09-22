@@ -1,0 +1,36 @@
+@host = http://localhost:5191
+
+### Все команды
+GET {{host}}/api/team
+Accept: application/json
+
+### Команда по Id
+GET {{host}}/api/team/1
+Accept: application/json
+
+### Создать
+POST {{host}}/api/team
+Content-Type: application/json
+
+{
+  "id": 0,
+  "name": "Astana Team",
+  "city": "Astana"
+}
+
+### Изменить
+PUT {{host}}/api/team/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Updated Team",
+  "city": "Almaty"
+}
+
+### Поиск по городу
+GET {{host}}/api/team/city/Almaty
+Accept: application/json
+
+### Удалить
+DELETE {{host}}/api/team/1

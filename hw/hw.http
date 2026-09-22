@@ -1,0 +1,47 @@
+@hw_HostAddress = http://localhost:5294
+@bookId = 1
+
+### Создать книгу; скопируйте data.id в bookId
+POST {{hw_HostAddress}}/api/books
+Content-Type: application/json
+
+{
+  "title": "Мастер и Маргарита",
+  "authorName": "Михаил Булгаков",
+  "year": 1967,
+  "price": 1500,
+  "description": "Роман"
+}
+
+### Все книги
+GET {{hw_HostAddress}}/api/books
+
+### Одна книга
+GET {{hw_HostAddress}}/api/books/{{bookId}}
+
+### Обновить
+PUT {{hw_HostAddress}}/api/books/{{bookId}}
+Content-Type: application/json
+
+{
+  "title": "Мастер и Маргарита",
+  "authorName": "Михаил Булгаков",
+  "year": 1967,
+  "price": 1800,
+  "description": "Обновлённое описание"
+}
+
+### Поиск по части имени автора
+GET {{hw_HostAddress}}/api/books?author=Булгаков
+
+### Удалить
+DELETE {{hw_HostAddress}}/api/books/{{bookId}}
+
+### После удаления — 404
+GET {{hw_HostAddress}}/api/books/{{bookId}}
+
+### Ошибка валидации — 400
+POST {{hw_HostAddress}}/api/books
+Content-Type: application/json
+
+{"title":"", "authorName":"", "year":0, "price":-1}
