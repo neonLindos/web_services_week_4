@@ -1,0 +1,32 @@
+@host = http://localhost:5263
+
+### GET all
+GET {{host}}/api/products
+Accept: application/json
+
+### GET by id
+GET {{host}}/api/products/1
+Accept: application/json
+
+### POST
+POST {{host}}/api/products
+Content-Type: application/json
+
+{
+  "id": 0,
+  "name": "Ноутбук",
+  "price": 350000
+}
+
+### PUT
+PUT {{host}}/api/products/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Игровой ноутбук",
+  "price": 450000
+}
+
+### DELETE
+DELETE {{host}}/api/products/1
