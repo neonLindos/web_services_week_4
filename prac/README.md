@@ -8,13 +8,15 @@
 
 ## Как запустить
 
+В этой папке выполните `dotnet run` (нужен .NET 10 SDK; `make` делает то же самое).
+Миграции применяются автоматически при старте, SQLite-файл создаётся сам.
+Остановка — `Ctrl+C`.
+
+
 В этой папке выполните:
 
 ```powershell
-dotnet tool restore
-dotnet restore
-dotnet ef database update
-dotnet run --launch-profile http
+dotnet run
 ```
 
 Откройте http://localhost:5191/swagger. Строка подключения — в appsettings.json, SQLite создаётся миграцией Code First. Отдельный сервер БД не нужен.

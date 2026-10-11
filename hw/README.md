@@ -8,20 +8,19 @@
 
 ## Как запустить
 
+В этой папке выполните `dotnet run` (нужен .NET 10 SDK; `make` делает то же самое).
+Миграции применяются автоматически при старте, SQLite-файл создаётся сам.
+Остановка — `Ctrl+C`.
+
+
 1. Откройте `hw.csproj` в Visual Studio или терминал в этой папке. Нужен .NET 10 SDK.
-2. Восстановите зависимости и примените миграции:
+2. Запустите приложение:
 
    ```powershell
-   dotnet restore
-   dotnet ef database update
+   dotnet run
    ```
 
-   Используется установленный инструмент `dotnet-ef` версии 10. Строка подключения находится в `appsettings.json`: `Data Source=database.db`. SQLite работает как файловая библиотека, отдельный сервер БД не нужен.
-3. Запустите приложение:
-
-   ```powershell
-   dotnet run --launch-profile http
-   ```
+   Миграции применяются автоматически при старте. Строка подключения находится в `appsettings.json`: `Data Source=database.db`. SQLite работает как файловая библиотека, отдельный сервер БД не нужен.
 
 4. Откройте <http://localhost:5294/swagger>. Swagger доступен в Development, описание API — `/openapi/v1.json`.
 
